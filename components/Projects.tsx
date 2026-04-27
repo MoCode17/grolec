@@ -29,16 +29,16 @@ export default function Projects() {
   }, []);
 
   return (
-    <section id="projects" className="bg-dark-light/30 py-20 md:py-28">
+    <section id="projects" className="bg-white py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <div>
           <div className="flex items-center gap-3 mb-4">
             <span className="block w-8 h-px bg-copper" />
-            <span className="text-copper text-xs font-semibold uppercase tracking-[0.2em]">
+            <span className="text-copper-light text-xs font-semibold uppercase tracking-[0.2em]">
               Projects
             </span>
           </div>
-          <h2 className="font-heading text-5xl md:text-6xl uppercase text-white leading-none tracking-wide">
+          <h2 className="font-heading text-5xl md:text-6xl uppercase text-dark leading-none tracking-wide">
             Our Recent Work
           </h2>
         </div>
