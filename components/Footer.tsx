@@ -22,15 +22,15 @@ export default function Footer() {
           {/* Brand col */}
           <div className="lg:col-span-2 flex flex-col gap-5">
             <Image
-              src="/images/Grolec%20White.png"
+              src="/images/Brandmark%20Transparent.png"
               alt="Grolec Electrical Group"
               width={200}
               height={56}
               className="h-12 w-auto object-contain object-left"
             />
             <p className="text-muted text-sm leading-relaxed max-w-xs">
-              Melbourne&apos;s trusted electrical contractors. Licensed, insured, and
-              committed to quality workmanship on every job.
+              Melbourne&apos;s trusted electrical contractors. Licensed,
+              insured, and committed to quality workmanship on every job.
             </p>
             <div className="flex items-center gap-2 mt-1">
               <span className="text-xs text-muted uppercase tracking-widest">

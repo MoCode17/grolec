@@ -16,6 +16,11 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setMenuOpen(false);
+  };
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
     onScroll();
@@ -29,7 +34,9 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
   return (
@@ -42,12 +49,12 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
         {/* Logo */}
-        <Link href="/" className="relative z-10 flex-shrink-0">
+        <Link href="/" className="relative z-10 shrink-0">
           <Image
-            src="/images/White%20Text%20Transparent.png"
+            src="/images/White%20Text%20Transparent%20Crop.png"
             alt="Grolec Electrical Group"
-            width={160}
-            height={44}
+            width={240}
+            height={80}
             className="h-10 w-auto object-contain"
             priority
           />
