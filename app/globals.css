@@ -289,7 +289,7 @@ body {
 }
 .service-card:hover {
   border-color: rgba(184, 78, 44, 0.45);
-  box-shadow: 0 8px 32px rgba(184, 78, 44, 0.45);
+  box-shadow: 0 8px 32px rgba(26, 22, 20, 0.08);
   transform: translateY(-4px);
 }
 

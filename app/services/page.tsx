@@ -171,37 +171,6 @@ const services = [
   },
 ];
 
-// Alternating: light → dark → light
-const sectionThemes = [
-  {
-    bg: "bg-cream",
-    surface: "bg-paper",
-    text: "text-ink",
-    textDim: "text-ink-dim",
-    muted: "text-ink-muted",
-    border: "border-edge-light",
-    iconBg: "bg-cream",
-  },
-  {
-    bg: "bg-dark text-white",
-    surface: "bg-surface",
-    text: "text-white",
-    textDim: "text-snow-dim",
-    muted: "text-muted",
-    border: "border-edge",
-    iconBg: "bg-dark",
-  },
-  {
-    bg: "bg-cream",
-    surface: "bg-paper",
-    text: "text-ink",
-    textDim: "text-ink-dim",
-    muted: "text-ink-muted",
-    border: "border-edge-light",
-    iconBg: "bg-cream",
-  },
-];
-
 export default function ServicesPage() {
   return (
     <>
@@ -225,71 +194,138 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ── Services detail ── */}
-      {services.map(({ id, title, tagline, description, items, icon }, idx) => {
-        const t = sectionThemes[idx];
-        return (
-          <section
-            key={id}
-            id={id}
-            className={`py-20 md:py-28 px-6 lg:px-10 border-b ${t.bg} ${t.border}`}
-          >
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20">
-                <div className="lg:col-span-2 flex flex-col gap-6">
-                  <div
-                    className={`text-copper w-16 h-16 flex items-center justify-center border rounded-sm ${t.border} ${t.iconBg}`}
+      {/* ── Category overview cards (LIGHT) ── */}
+      <section className="py-20 md:py-28 px-6 lg:px-10 bg-cream border-b border-edge-light">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="block w-8 h-px bg-copper" />
+            <span className="text-copper text-xs font-semibold uppercase tracking-[0.2em]">
+              What We Offer
+            </span>
+          </div>
+          <h2 className="font-heading text-5xl md:text-6xl uppercase text-ink leading-none tracking-wide max-w-xl">
+            Three areas of expertise.
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-14">
+            {services.map(({ id, title, tagline, icon, items }) => (
+              <div
+                key={id}
+                className="service-card p-8 flex flex-col gap-5"
+              >
+                <div className="w-14 h-14 bg-cream border border-edge-light rounded-sm flex items-center justify-center text-copper shrink-0">
+                  {icon}
+                </div>
+                <div>
+                  <h3 className="font-heading text-4xl uppercase text-ink leading-none mb-2">
+                    {title}
+                  </h3>
+                  <p className="text-sm text-ink-dim leading-relaxed">
+                    {tagline}
+                  </p>
+                </div>
+                <span className="inline-flex items-center gap-1.5 text-xs text-copper bg-copper/10 px-3 py-1.5 rounded-sm w-fit font-semibold uppercase tracking-wider">
+                  {items.length} services
+                </span>
+                <Link
+                  href={`#${id}`}
+                  className="group flex items-center gap-2 text-xs font-semibold text-copper uppercase tracking-widest mt-auto pt-5 border-t border-edge-light"
+                >
+                  Explore services
+                  <svg
+                    className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-1"
+                    viewBox="0 0 12 12"
+                    fill="none"
                   >
-                    {icon}
-                  </div>
-                  <div>
-                    <p className="text-copper text-xs font-semibold uppercase tracking-[0.2em] mb-2">
-                      {tagline}
-                    </p>
-                    <h2
-                      className={`font-heading text-5xl md:text-6xl uppercase leading-none tracking-wide mb-5 ${t.text}`}
-                    >
+                    <path
+                      d="M2 6h8M7 3l3 3-3 3"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Service detail sections (single DARK section, no alternation) ── */}
+      <section className="bg-dark border-b border-edge px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto">
+          {services.map(
+            ({ id, title, tagline, description, items, icon }, idx) => (
+              <div key={id}>
+                {idx > 0 && <div className="border-t border-edge/50" />}
+
+                <div id={id} className="py-20 md:py-24 scroll-mt-24 relative">
+                  {/* Faint number watermark */}
+                  <span className="font-heading text-[10rem] leading-none text-white/4 absolute top-12 right-0 select-none pointer-events-none hidden lg:block">
+                    {String(idx + 1).padStart(2, "0")}
+                  </span>
+
+                  {/* Block header */}
+                  <div className="mb-10 relative z-10">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="block w-8 h-px bg-copper" />
+                      <span className="text-copper text-xs font-semibold uppercase tracking-[0.2em]">
+                        {tagline}
+                      </span>
+                    </div>
+                    <h2 className="font-heading text-5xl md:text-6xl uppercase text-white leading-none tracking-wide">
                       {title}
                     </h2>
-                    <p className={`text-sm leading-relaxed ${t.textDim}`}>
-                      {description}
-                    </p>
                   </div>
-                  <Link
-                    href="/contact"
-                    className="btn-copper text-xs px-7 py-3.5 tracking-widest self-start mt-2"
-                  >
-                    Get a Quote
-                  </Link>
-                </div>
 
-                <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {items.map(({ label, desc }) => (
-                    <div
-                      key={label}
-                      className={`p-5 ${t.surface} border ${t.border} hover:border-copper/40 transition-colors`}
-                    >
-                      <div className="flex items-start gap-3">
-                        <span className="w-1.5 h-1.5 rounded-full bg-copper mt-2 flex-shrink-0" />
-                        <div>
-                          <p className={`text-sm font-semibold mb-1 ${t.text}`}>
-                            {label}
-                          </p>
-                          <p className={`text-xs leading-relaxed ${t.textDim}`}>
-                            {desc}
-                          </p>
-                        </div>
+                  {/* Content grid */}
+                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20">
+                    <div className="lg:col-span-2 flex flex-col gap-6">
+                      <div className="text-copper w-16 h-16 flex items-center justify-center border border-copper/30 rounded-sm bg-dark flex-shrink-0">
+                        {icon}
                       </div>
+                      <p className="text-snow-dim text-sm leading-relaxed">
+                        {description}
+                      </p>
+                      <Link
+                        href="/contact"
+                        className="btn-copper text-xs px-7 py-3.5 tracking-widest self-start"
+                      >
+                        Get a Quote
+                      </Link>
                     </div>
-                  ))}
+
+                    <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {items.map(({ label, desc }) => (
+                        <div
+                          key={label}
+                          className="bg-surface border border-edge hover:border-copper/40 transition-colors p-5 group"
+                        >
+                          <div className="h-0.5 w-0 group-hover:w-full bg-copper transition-all duration-300 mb-4" />
+                          <div className="flex items-start gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-copper mt-1.5 shrink-0" />
+                            <div>
+                              <p className="text-sm font-semibold mb-1 text-snow-dim">
+                                {label}
+                              </p>
+                              <p className="text-xs leading-relaxed text-muted">
+                                {desc}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
-        );
-      })}
+            ),
+          )}
+        </div>
+      </section>
 
-      {/* ── CTA banner (COPPER for punctuation) ── */}
+      {/* ── CTA banner ── */}
       <section className="py-16 px-6 lg:px-10 bg-copper">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
