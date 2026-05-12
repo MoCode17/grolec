@@ -54,11 +54,11 @@ export function StatCounter({
 
   return (
     <div ref={ref} className="text-center">
-      <div className="font-display text-4xl font-bold text-dark md:text-5xl">
+      <div className="font-heading text-5xl md:text-6xl tracking-wide text-white">
         {decimals > 0 ? count.toFixed(decimals) : Math.floor(count)}
         {suffix}
       </div>
-      <div className="mt-1 text-sm font-medium text-dark uppercase tracking-wider">
+      <div className="mt-2 text-xs font-semibold text-white/85 uppercase tracking-[0.18em]">
         {label}
       </div>
     </div>

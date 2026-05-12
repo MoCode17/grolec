@@ -1,16 +1,34 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand palette */
-  --color-copper: #A0402A;
-  --color-copper-light: #B84D35;
-  --color-dark: #0D0D0D;
-  --color-surface: #161616;
-  --color-edge: #222222;
-  --color-muted: #888888;
+  /* ─── Brand accents ─────────────────────────────── */
+  --color-copper: #b84e2c;
+  --color-copper-fill: #a04026;
+  --color-copper-light: #d6643f;
+  --color-copper-soft: rgba(184, 78, 44, 0.1);
 
-  /* Typography */
-  --font-heading: var(--font-bebas), 'Barlow Condensed', sans-serif;
+  /* ─── Light palette (default page surfaces) ─────── */
+  --color-cream: #f7f4ee; /* primary light page bg */
+  --color-cream-alt: #efebe2; /* slightly deeper cream for alt rows */
+  --color-paper: #ffffff; /* card / lifted surface on light */
+  --color-edge-light: #e0d9cb; /* divider on light */
+
+  /* ─── Dark palette (alternating sections) ───────── */
+  --color-dark: #1a1a1a; /* primary dark section bg */
+  --color-surface: #262626; /* card / lifted surface on dark */
+  --color-edge: #333333; /* divider on dark */
+
+  /* ─── Text on light ─────────────────────────────── */
+  --color-ink: #1a1614; /* primary on light */
+  --color-ink-dim: #4f4944; /* body on light */
+  --color-ink-muted: #8e867b; /* labels / meta on light */
+
+  /* ─── Text on dark ──────────────────────────────── */
+  --color-snow-dim: #d6d2cb; /* body on dark */
+  --color-muted: #a8a099; /* meta on dark (bumped for AA) */
+
+  /* ─── Typography ────────────────────────────────── */
+  --font-heading: var(--font-bebas), "Barlow Condensed", sans-serif;
   --font-sans: var(--font-dm-sans), system-ui, sans-serif;
 }
 
@@ -20,15 +38,15 @@ html {
 }
 
 body {
-  background-color: #0D0D0D;
-  color: #ffffff;
+  background-color: #f7f4ee;
+  color: #1a1614;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── Noise grain texture ───────────────────────────── */
+/* ─── Noise grain texture (kept for dark hero) ──────── */
 .hero-grain::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -39,73 +57,94 @@ body {
   background-repeat: repeat;
 }
 
+/* Lighter grain variant for cream sections */
+.cream-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+  background-repeat: repeat;
+}
+
 /* ─── Scroll reveal animations ──────────────────────── */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition:
+    opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
-
 .reveal-left {
   opacity: 0;
   transform: translateX(-30px);
-  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition:
+    opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-
 .reveal-left.visible {
   opacity: 1;
   transform: translateX(0);
 }
-
 .reveal-scale {
   opacity: 0;
   transform: scale(0.96);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
-
 .reveal-scale.visible {
   opacity: 1;
   transform: scale(1);
 }
 
-.delay-100 { transition-delay: 0.1s; }
-.delay-200 { transition-delay: 0.2s; }
-.delay-300 { transition-delay: 0.3s; }
-.delay-400 { transition-delay: 0.4s; }
+.delay-100 {
+  transition-delay: 0.1s;
+}
+.delay-200 {
+  transition-delay: 0.2s;
+}
+.delay-300 {
+  transition-delay: 0.3s;
+}
+.delay-400 {
+  transition-delay: 0.4s;
+}
 
 /* ─── Copper CTA button ─────────────────────────────── */
 .btn-copper {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #A0402A;
+  background-color: #a04026;
   color: #ffffff;
   font-weight: 600;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
   cursor: pointer;
   white-space: nowrap;
 }
-
 .btn-copper:hover {
-  background-color: #B84D35;
-  box-shadow: 0 0 24px rgba(160, 64, 42, 0.45);
+  background-color: #b84e2c;
+  box-shadow: 0 4px 24px rgba(184, 78, 44, 0.32);
   transform: translateY(-1px);
 }
-
 .btn-copper:active {
   transform: translateY(0);
 }
 
-/* ─── Ghost / outline button ────────────────────────── */
+/* ─── Ghost / outline button — DARK context ──────────── */
 .btn-ghost {
   display: inline-flex;
   align-items: center;
@@ -115,46 +154,97 @@ body {
   font-weight: 600;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.15s ease;
   cursor: pointer;
   white-space: nowrap;
 }
-
 .btn-ghost:hover {
   border-color: rgba(255, 255, 255, 0.7);
   background-color: rgba(255, 255, 255, 0.06);
   transform: translateY(-1px);
 }
 
-/* ─── Form inputs ───────────────────────────────────── */
+/* ─── Ghost / outline button — LIGHT context ─────────── */
+.btn-ghost-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(26, 22, 20, 0.28);
+  color: #1a1614;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.15s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-ghost-light:hover {
+  border-color: rgba(26, 22, 20, 0.7);
+  background-color: rgba(26, 22, 20, 0.04);
+  transform: translateY(-1px);
+}
+
+/* ─── Form inputs — DARK context ─────────────────────── */
 .form-input {
   width: 100%;
-  background-color: #161616;
-  border: 1px solid #2a2a2a;
+  background-color: #262626;
+  border: 1px solid #333333;
   color: #ffffff;
   padding: 0.9rem 1rem;
   font-size: 0.9375rem;
   font-family: var(--font-sans);
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
   appearance: none;
 }
-
 .form-input::placeholder {
-  color: #4a4a4a;
+  color: #6e6864;
 }
-
 .form-input:focus {
-  border-color: #A0402A;
-  box-shadow: 0 0 0 3px rgba(160, 64, 42, 0.18);
+  border-color: #b84e2c;
+  box-shadow: 0 0 0 3px rgba(184, 78, 44, 0.18);
 }
-
 .form-input option {
-  background-color: #161616;
+  background-color: #262626;
   color: #ffffff;
 }
 
-/* ─── Nav link hover ────────────────────────────────── */
+/* ─── Form inputs — LIGHT context ────────────────────── */
+.form-input-light {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e0d9cb;
+  color: #1a1614;
+  padding: 0.9rem 1rem;
+  font-size: 0.9375rem;
+  font-family: var(--font-sans);
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  appearance: none;
+}
+.form-input-light::placeholder {
+  color: #b0a99b;
+}
+.form-input-light:focus {
+  border-color: #b84e2c;
+  box-shadow: 0 0 0 3px rgba(184, 78, 44, 0.18);
+}
+.form-input-light option {
+  background-color: #ffffff;
+  color: #1a1614;
+}
+
+/* ─── Nav link hover (dark nav) ──────────────────────── */
 .nav-link {
   position: relative;
   color: rgba(255, 255, 255, 0.75);
@@ -164,22 +254,19 @@ body {
   letter-spacing: 0.02em;
   transition: color 0.2s ease;
 }
-
 .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -3px;
   left: 0;
   width: 0;
   height: 1px;
-  background-color: #A0402A;
+  background-color: #b84e2c;
   transition: width 0.25s ease;
 }
-
 .nav-link:hover {
   color: #ffffff;
 }
-
 .nav-link:hover::after {
   width: 100%;
 }
@@ -187,41 +274,54 @@ body {
 /* ─── Section copper rule ───────────────────────────── */
 .copper-rule {
   height: 1px;
-  background: linear-gradient(90deg, transparent, #A0402A 50%, transparent);
+  background: linear-gradient(90deg, transparent, #b84e2c 50%, transparent);
   opacity: 0.5;
 }
 
-/* ─── Service card hover ────────────────────────────── */
+/* ─── Service card — LIGHT context ──────────────────── */
 .service-card {
-  background-color: #161616;
-  border: 1px solid #222222;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  background-color: #ffffff;
+  border: 1px solid #e0d9cb;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
 }
-
 .service-card:hover {
-  border-color: rgba(160, 64, 42, 0.5);
-  box-shadow: 0 4px 32px rgba(160, 64, 42, 0.12);
+  border-color: rgba(184, 78, 44, 0.45);
+  box-shadow: 0 8px 32px rgba(184, 78, 44, 0.45);
   transform: translateY(-4px);
 }
 
-/* ─── Testimonial card ──────────────────────────────── */
+/* ─── Testimonial card — DARK context ──────────────── */
 .testimonial-card {
-  background-color: #161616;
-  border: 1px solid #222222;
-  transition: border-color 0.3s ease;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-edge);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
-
 .testimonial-card:hover {
-  border-color: rgba(160, 64, 42, 0.35);
+  border-color: rgba(184, 78, 44, 0.45);
+  box-shadow: 0 8px 32px rgba(184, 78, 44, 0.45);
 }
 
 /* ─── Copper icon fill ──────────────────────────────── */
 .icon-copper {
-  color: #A0402A;
+  color: #b84e2c;
 }
 
-/* ─── Page hero (inner pages) ───────────────────────── */
+/* ─── Page hero (inner pages) — DARK ─────────────────── */
 .page-hero {
-  background: linear-gradient(135deg, #0D0D0D 0%, #161616 50%, #0D0D0D 100%);
-  border-bottom: 1px solid #222222;
+  background: linear-gradient(135deg, #1a1a1a 0%, #262626 50%, #1a1a1a 100%);
+  border-bottom: 1px solid #333333;
+}
+
+/* ─── Focus-visible rings on all interactive elements ─ */
+.btn-copper:focus-visible,
+.btn-ghost:focus-visible,
+.btn-ghost-light:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid #b84e2c;
+  outline-offset: 3px;
 }

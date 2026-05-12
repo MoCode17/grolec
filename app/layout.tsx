@@ -51,11 +51,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en-AU"
-      className={`${bebasNeue.variable} ${dmSans.variable}`}
-    >
-      <body className="min-h-screen flex flex-col bg-dark text-white antialiased">
+    <html lang="en-AU" className={`${bebasNeue.variable} ${dmSans.variable}`}>
+      <body className="min-h-screen flex flex-col bg-cream text-ink antialiased">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

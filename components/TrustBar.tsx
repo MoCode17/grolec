@@ -85,7 +85,9 @@ export default function TrustBar() {
     const el = ref.current;
     if (!el) return;
 
-    const children = Array.from(el.querySelectorAll<HTMLElement>(".trust-item"));
+    const children = Array.from(
+      el.querySelectorAll<HTMLElement>(".trust-item"),
+    );
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -95,16 +97,16 @@ export default function TrustBar() {
           observer.disconnect();
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div className="bg-surface border-y border-edge" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x lg:divide-edge">
+    <div className="bg-cream border-b border-edge-light" ref={ref}>
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x lg:divide-edge-light">
           {trustItems.map(({ label, desc, icon }) => (
             <div
               key={label}
@@ -112,10 +114,10 @@ export default function TrustBar() {
             >
               <div className="text-copper flex-shrink-0">{icon}</div>
               <div>
-                <p className="text-white text-sm font-semibold leading-tight">
+                <p className="text-ink text-sm font-semibold leading-tight">
                   {label}
                 </p>
-                <p className="text-muted text-xs mt-0.5">{desc}</p>
+                <p className="text-ink-muted text-xs mt-0.5">{desc}</p>
               </div>
             </div>
           ))}

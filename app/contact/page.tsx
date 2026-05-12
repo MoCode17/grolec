@@ -148,7 +148,9 @@ export default function ContactPage() {
                     <span className="text-white/70 text-sm">{day}</span>
                     <span
                       className={`text-sm font-medium ${
-                        time.includes("Emergency") ? "text-copper" : "text-white"
+                        time.includes("Emergency")
+                          ? "text-copper"
+                          : "text-white"
                       }`}
                     >
                       {time}
@@ -186,9 +188,14 @@ export default function ContactPage() {
             <div className="flex items-center gap-3 p-4 bg-surface border border-copper/20 mt-1">
               <div className="w-2 h-2 rounded-full bg-copper animate-pulse flex-shrink-0" />
               <p className="text-white/70 text-xs">
-                <span className="text-copper font-semibold">Emergency line open 24/7</span>{" "}
+                <span className="text-copper font-semibold">
+                  Emergency line open 24/7
+                </span>{" "}
                 — Call{" "}
-                <a href="tel:+61412345678" className="text-white hover:text-copper transition-colors">
+                <a
+                  href="tel:+61412345678"
+                  className="text-white hover:text-copper transition-colors"
+                >
                   0412 345 678
                 </a>
               </p>

@@ -120,7 +120,7 @@ export default function ServicesSection() {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
     observer.observe(section);
     return () => observer.disconnect();
@@ -129,7 +129,7 @@ export default function ServicesSection() {
   return (
     <section
       ref={sectionRef}
-      className="py-24 md:py-32 px-6 lg:px-10 bg-dark"
+      className="py-24 md:py-32 px-6 lg:px-10 bg-cream"
       id="services"
     >
       <div className="max-w-7xl mx-auto">
@@ -141,10 +141,10 @@ export default function ServicesSection() {
               What We Do
             </span>
           </div>
-          <h2 className="font-heading text-5xl md:text-6xl uppercase text-white leading-none tracking-wide">
+          <h2 className="font-heading text-5xl md:text-6xl uppercase text-ink leading-none tracking-wide">
             Electrical Services
             <br />
-            <span className="text-muted">Built for Melbourne</span>
+            <span className="text-ink-muted">Built for Melbourne</span>
           </h2>
         </div>
 
@@ -157,16 +157,16 @@ export default function ServicesSection() {
               className="service-card service-reveal reveal flex flex-col p-8 gap-6"
             >
               {/* Icon */}
-              <div className="text-copper w-14 h-14 flex items-center justify-center border border-edge rounded-sm">
+              <div className="text-copper w-14 h-14 flex items-center justify-center border border-edge-light rounded-sm bg-cream">
                 {icon}
               </div>
 
               {/* Text */}
               <div className="flex flex-col gap-3 flex-1">
-                <h3 className="font-heading text-3xl uppercase tracking-wide text-white">
+                <h3 className="font-heading text-3xl uppercase tracking-wide text-ink">
                   {title}
                 </h3>
-                <p className="text-muted text-sm leading-relaxed">
+                <p className="text-ink-dim text-sm leading-relaxed">
                   {description}
                 </p>
               </div>
@@ -176,7 +176,7 @@ export default function ServicesSection() {
                 {features.map((f) => (
                   <li key={f} className="flex items-center gap-2.5">
                     <span className="w-1 h-1 rounded-full bg-copper flex-shrink-0" />
-                    <span className="text-white/60 text-xs">{f}</span>
+                    <span className="text-ink-dim text-xs">{f}</span>
                   </li>
                 ))}
               </ul>
@@ -184,7 +184,7 @@ export default function ServicesSection() {
               {/* Link */}
               <Link
                 href={`/services#${id}`}
-                className="group flex items-center gap-2 text-copper text-xs font-semibold uppercase tracking-widest mt-auto pt-2 border-t border-edge"
+                className="group flex items-center gap-2 text-copper text-xs font-semibold uppercase tracking-widest mt-auto pt-2 border-t border-edge-light"
               >
                 Learn More
                 <svg
@@ -193,6 +193,7 @@ export default function ServicesSection() {
                   viewBox="0 0 14 14"
                   fill="none"
                   className="group-hover:translate-x-1 transition-transform"
+                  aria-hidden="true"
                 >
                   <path
                     d="M2 7h10M8 3l4 4-4 4"

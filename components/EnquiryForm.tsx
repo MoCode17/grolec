@@ -43,7 +43,9 @@ export default function EnquiryForm() {
     message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
-  const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({});
+  const [touched, setTouched] = useState<
+    Partial<Record<keyof FormData, boolean>>
+  >({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -59,35 +61,47 @@ export default function EnquiryForm() {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
   ) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
     if (touched[name as keyof FormData]) {
       const newErrors = validate({ ...form, [name]: value });
-      setErrors((prev) => ({ ...prev, [name]: newErrors[name as keyof FormData] }));
+      setErrors((prev) => ({
+        ...prev,
+        [name]: newErrors[name as keyof FormData],
+      }));
     }
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleBlur = (
+    e: React.FocusEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => {
     const { name } = e.target;
     setTouched((prev) => ({ ...prev, [name]: true }));
     const newErrors = validate(form);
-    setErrors((prev) => ({ ...prev, [name]: newErrors[name as keyof FormData] }));
+    setErrors((prev) => ({
+      ...prev,
+      [name]: newErrors[name as keyof FormData],
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const allTouched = Object.keys(form).reduce(
       (acc, k) => ({ ...acc, [k]: true }),
-      {} as Record<keyof FormData, boolean>
+      {} as Record<keyof FormData, boolean>,
     );
     setTouched(allTouched);
     const newErrors = validate(form);
@@ -101,11 +115,7 @@ export default function EnquiryForm() {
   };
 
   return (
-    <section
-      ref={sectionRef}
-      className="py-24 md:py-32 bg-dark"
-      id="quote"
-    >
+    <section ref={sectionRef} className="py-24 md:py-32 bg-cream" id="quote">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="form-inner reveal">
           {/* Header */}
@@ -116,10 +126,10 @@ export default function EnquiryForm() {
                 Get in Touch
               </span>
             </div>
-            <h2 className="font-heading text-5xl md:text-6xl uppercase text-white leading-none tracking-wide mb-4">
+            <h2 className="font-heading text-5xl md:text-6xl uppercase text-ink leading-none tracking-wide mb-4">
               Get a Free Quote
             </h2>
-            <p className="text-muted text-sm leading-relaxed">
+            <p className="text-ink-dim text-sm leading-relaxed">
               Tell us what you need and we&apos;ll get back to you within 24
               hours. No obligation, no hard sell.
             </p>
@@ -135,7 +145,7 @@ export default function EnquiryForm() {
             >
               {/* Name */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-muted uppercase tracking-widest font-medium">
+                <label className="text-xs text-ink-muted uppercase tracking-widest font-medium">
                   Full Name *
                 </label>
                 <input
@@ -145,16 +155,16 @@ export default function EnquiryForm() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="John Smith"
-                  className={`form-input ${errors.name && touched.name ? "border-red-500/70" : ""}`}
+                  className={`form-input-light ${errors.name && touched.name ? "border-red-500/70" : ""}`}
                 />
                 {errors.name && touched.name && (
-                  <p className="text-red-400 text-xs">{errors.name}</p>
+                  <p className="text-red-600 text-xs">{errors.name}</p>
                 )}
               </div>
 
               {/* Phone */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-muted uppercase tracking-widest font-medium">
+                <label className="text-xs text-ink-muted uppercase tracking-widest font-medium">
                   Phone *
                 </label>
                 <input
@@ -164,16 +174,16 @@ export default function EnquiryForm() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="0400 000 000"
-                  className={`form-input ${errors.phone && touched.phone ? "border-red-500/70" : ""}`}
+                  className={`form-input-light ${errors.phone && touched.phone ? "border-red-500/70" : ""}`}
                 />
                 {errors.phone && touched.phone && (
-                  <p className="text-red-400 text-xs">{errors.phone}</p>
+                  <p className="text-red-600 text-xs">{errors.phone}</p>
                 )}
               </div>
 
               {/* Email */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-muted uppercase tracking-widest font-medium">
+                <label className="text-xs text-ink-muted uppercase tracking-widest font-medium">
                   Email *
                 </label>
                 <input
@@ -183,16 +193,16 @@ export default function EnquiryForm() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   placeholder="john@example.com"
-                  className={`form-input ${errors.email && touched.email ? "border-red-500/70" : ""}`}
+                  className={`form-input-light ${errors.email && touched.email ? "border-red-500/70" : ""}`}
                 />
                 {errors.email && touched.email && (
-                  <p className="text-red-400 text-xs">{errors.email}</p>
+                  <p className="text-red-600 text-xs">{errors.email}</p>
                 )}
               </div>
 
               {/* Service */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs text-muted uppercase tracking-widest font-medium">
+                <label className="text-xs text-ink-muted uppercase tracking-widest font-medium">
                   Service Type *
                 </label>
                 <select
@@ -200,7 +210,7 @@ export default function EnquiryForm() {
                   value={form.service}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className={`form-input ${errors.service && touched.service ? "border-red-500/70" : ""}`}
+                  className={`form-input-light ${errors.service && touched.service ? "border-red-500/70" : ""}`}
                 >
                   {serviceOptions.map(({ value, label }) => (
                     <option key={value} value={value}>
@@ -209,13 +219,13 @@ export default function EnquiryForm() {
                   ))}
                 </select>
                 {errors.service && touched.service && (
-                  <p className="text-red-400 text-xs">{errors.service}</p>
+                  <p className="text-red-600 text-xs">{errors.service}</p>
                 )}
               </div>
 
               {/* Message */}
               <div className="md:col-span-2 flex flex-col gap-1.5">
-                <label className="text-xs text-muted uppercase tracking-widest font-medium">
+                <label className="text-xs text-ink-muted uppercase tracking-widest font-medium">
                   Message
                 </label>
                 <textarea
@@ -225,12 +235,12 @@ export default function EnquiryForm() {
                   onBlur={handleBlur}
                   placeholder="Briefly describe what you need help with..."
                   rows={4}
-                  className="form-input resize-none"
+                  className="form-input-light resize-none"
                 />
               </div>
 
               {/* Submit */}
-              <div className="md:col-span-2">
+              <div className="md:col-span-2 flex flex-wrap items-center gap-5">
                 <button
                   type="submit"
                   disabled={loading}
@@ -238,6 +248,15 @@ export default function EnquiryForm() {
                 >
                   {loading ? "Sending..." : "Send Enquiry"}
                 </button>
+                <p className="text-ink-muted text-xs">
+                  Need something urgent?{" "}
+                  <a
+                    href="tel:+61412345678"
+                    className="text-copper font-semibold hover:underline"
+                  >
+                    Call 0412 345 678
+                  </a>
+                </p>
               </div>
             </form>
           )}
@@ -252,28 +271,37 @@ function SuccessState() {
     <div className="max-w-md">
       <div className="flex items-center gap-4 mb-5">
         <div className="w-12 h-12 rounded-sm bg-copper/10 border border-copper/40 flex items-center justify-center">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 22 22"
+            fill="none"
+            aria-hidden="true"
+          >
             <path
               d="M4 11l5 5 9-9"
-              stroke="#A0402A"
+              stroke="#B84E2C"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
           </svg>
         </div>
-        <h3 className="font-heading text-3xl uppercase tracking-wide text-white">
+        <h3 className="font-heading text-3xl uppercase tracking-wide text-ink">
           Message Sent
         </h3>
       </div>
-      <p className="text-muted text-sm leading-relaxed mb-6">
+      <p className="text-ink-dim text-sm leading-relaxed mb-6">
         Thanks for reaching out. We&apos;ll review your enquiry and get back to
         you within 24 hours during business days.
       </p>
       <div className="border-l-2 border-copper pl-4">
-        <p className="text-white/70 text-sm">
+        <p className="text-ink-dim text-sm">
           Need something urgent?{" "}
-          <a href="tel:+61412345678" className="text-copper hover:underline">
+          <a
+            href="tel:+61412345678"
+            className="text-copper hover:underline font-semibold"
+          >
             Call us directly
           </a>
         </p>

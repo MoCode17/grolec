@@ -36,15 +36,18 @@ export default function WhyGrolec() {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
     els.forEach((el) => el && observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section className="py-24 md:py-32 bg-surface border-y border-edge">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+    <section className="py-24 md:py-32 bg-dark text-white border-y border-edge relative overflow-hidden">
+      {/* Subtle copper glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_50%,rgba(184,78,44,0.06),transparent_60%)] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Left: content */}
           <div ref={leftRef} className="reveal-left flex flex-col gap-10">
@@ -97,7 +100,7 @@ export default function WhyGrolec() {
             <div className="relative w-full max-w-md aspect-square">
               {/* Decorative border frame */}
               <div className="absolute inset-4 border border-copper/20 rounded-sm pointer-events-none z-10" />
-              <div className="absolute inset-0 rounded-sm overflow-hidden bg-dark">
+              <div className="absolute inset-0 rounded-sm overflow-hidden bg-surface">
                 <Image
                   src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&q=80"
                   alt="Grolec electrician at work"

@@ -15,7 +15,7 @@ const serviceLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-dark border-t border-edge">
+    <footer className="bg-dark text-white border-t border-edge">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         {/* Main footer */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-16">
@@ -28,12 +28,12 @@ export default function Footer() {
               height={56}
               className="h-12 w-auto object-contain object-left"
             />
-            <p className="text-muted text-sm leading-relaxed max-w-xs">
+            <p className="text-snow-dim text-sm leading-relaxed max-w-xs">
               Melbourne&apos;s trusted electrical contractors. Licensed,
               insured, and committed to quality workmanship on every job.
             </p>
             <div className="flex items-center gap-2 mt-1">
-              <span className="text-xs text-muted uppercase tracking-widest">
+              <span className="text-xs text-copper uppercase tracking-widest font-semibold">
                 Powering Your Ideas.
               </span>
             </div>
@@ -49,7 +49,7 @@ export default function Footer() {
                 <li key={href}>
                   <Link
                     href={href}
-                    className="text-sm text-white/70 hover:text-white transition-colors"
+                    className="text-sm text-snow-dim hover:text-white transition-colors"
                   >
                     {label}
                   </Link>
@@ -59,7 +59,7 @@ export default function Footer() {
                 <li key={href}>
                   <Link
                     href={href}
-                    className="text-sm text-white/70 hover:text-white transition-colors"
+                    className="text-sm text-snow-dim hover:text-white transition-colors"
                   >
                     {label}
                   </Link>
@@ -77,7 +77,7 @@ export default function Footer() {
               <li>
                 <a
                   href="tel:+61412345678"
-                  className="text-sm text-white/70 hover:text-white transition-colors"
+                  className="text-sm text-snow-dim hover:text-white transition-colors"
                 >
                   0412 345 678
                 </a>
@@ -85,13 +85,13 @@ export default function Footer() {
               <li>
                 <a
                   href="mailto:info@grolec.com.au"
-                  className="text-sm text-white/70 hover:text-white transition-colors"
+                  className="text-sm text-snow-dim hover:text-white transition-colors"
                 >
                   info@grolec.com.au
                 </a>
               </li>
               <li>
-                <span className="text-sm text-white/70">
+                <span className="text-sm text-snow-dim">
                   Melbourne, VIC 3000
                 </span>
               </li>

@@ -16,11 +16,6 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false);
-  };
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
     onScroll();
@@ -43,8 +38,8 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled || menuOpen
-          ? "bg-dark/96 backdrop-blur-md border-b border-edge"
-          : "bg-transparent"
+          ? "bg-dark/95 backdrop-blur-md border-b border-edge"
+          : "bg-dark/85 backdrop-blur-sm"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
@@ -71,6 +66,30 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
+
+          {/* Phone — always visible above the fold */}
+          <a
+            href="tel:+61412345678"
+            className="hidden lg:flex items-center gap-2 text-copper hover:text-copper-light transition-colors text-sm font-semibold tracking-wide"
+            aria-label="Call Grolec"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 20 20"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 5a2 2 0 012-2h2.28a1 1 0 01.95.68l1.15 3.45a1 1 0 01-.23 1.03l-1.4 1.4a11 11 0 005.66 5.66l1.4-1.4a1 1 0 011.03-.23l3.45 1.15A1 1 0 0119 15.72V18a2 2 0 01-2 2C8.16 20 1 12.84 1 5a2 2 0 012-2z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+              />
+            </svg>
+            0412 345 678
+          </a>
+
           <Link
             href="/contact"
             className="btn-copper text-xs px-6 py-3 tracking-widest"
@@ -120,6 +139,26 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
+          <a
+            href="tel:+61412345678"
+            className="text-copper text-base font-semibold tracking-wide flex items-center gap-2"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 20 20"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 5a2 2 0 012-2h2.28a1 1 0 01.95.68l1.15 3.45a1 1 0 01-.23 1.03l-1.4 1.4a11 11 0 005.66 5.66l1.4-1.4a1 1 0 011.03-.23l3.45 1.15A1 1 0 0119 15.72V18a2 2 0 01-2 2C8.16 20 1 12.84 1 5a2 2 0 012-2z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+              />
+            </svg>
+            0412 345 678
+          </a>
           <Link
             href="/contact"
             className="btn-copper text-sm px-6 py-4 tracking-widest mt-2 text-center"

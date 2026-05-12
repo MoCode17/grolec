@@ -28,7 +28,13 @@ const values = [
     desc: "We show up when we say we will, communicate clearly, and follow through on every commitment.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <circle cx="14" cy="14" r="10" stroke="currentColor" strokeWidth="1.5" />
+        <circle
+          cx="14"
+          cy="14"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        />
         <path
           d="M14 8v6l4 2"
           stroke="currentColor"
@@ -169,7 +175,7 @@ export default function AboutPage() {
             {values.map(({ title, desc, icon }) => (
               <div
                 key={title}
-                className="p-8 bg-dark border border-edge hover:border-copper/30 transition-colors flex flex-col gap-5"
+                className="p-8 bg-dark border border-edge hover:border-copper/30 hover:shadow-[0px_8px_32px_rgba(184, 78, 44, 0.45)] transition-colors flex flex-col gap-5"
               >
                 <div className="text-copper w-14 h-14 flex items-center justify-center border border-edge rounded-sm bg-surface">
                   {icon}

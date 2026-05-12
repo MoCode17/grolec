@@ -171,12 +171,43 @@ const services = [
   },
 ];
 
+// Alternating: light → dark → light
+const sectionThemes = [
+  {
+    bg: "bg-cream",
+    surface: "bg-paper",
+    text: "text-ink",
+    textDim: "text-ink-dim",
+    muted: "text-ink-muted",
+    border: "border-edge-light",
+    iconBg: "bg-cream",
+  },
+  {
+    bg: "bg-dark text-white",
+    surface: "bg-surface",
+    text: "text-white",
+    textDim: "text-snow-dim",
+    muted: "text-muted",
+    border: "border-edge",
+    iconBg: "bg-dark",
+  },
+  {
+    bg: "bg-cream",
+    surface: "bg-paper",
+    text: "text-ink",
+    textDim: "text-ink-dim",
+    muted: "text-ink-muted",
+    border: "border-edge-light",
+    iconBg: "bg-cream",
+  },
+];
+
 export default function ServicesPage() {
   return (
     <>
-      {/* Page hero */}
+      {/* ── Page hero (DARK) ── */}
       <section className="page-hero pt-36 pb-20 px-6 lg:px-10 hero-grain relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(160,64,42,0.06),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(184,78,44,0.08),transparent_60%)]" />
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="flex items-center gap-3 mb-5">
             <span className="block w-8 h-px bg-copper" />
@@ -187,38 +218,40 @@ export default function ServicesPage() {
           <h1 className="font-heading text-6xl md:text-8xl uppercase text-white leading-none tracking-wide mb-6">
             Our Services
           </h1>
-          <p className="text-muted text-lg max-w-xl leading-relaxed">
+          <p className="text-snow-dim text-lg max-w-xl leading-relaxed">
             From single-room renovations to full commercial fit-outs — licensed,
             insured, and built on Melbourne know-how.
           </p>
         </div>
       </section>
 
-      {/* Services detail */}
-      <div className="bg-dark">
-        {services.map(({ id, title, tagline, description, items, icon }, idx) => (
+      {/* ── Services detail ── */}
+      {services.map(({ id, title, tagline, description, items, icon }, idx) => {
+        const t = sectionThemes[idx];
+        return (
           <section
             key={id}
             id={id}
-            className={`py-20 md:py-28 px-6 lg:px-10 border-b border-edge ${
-              idx % 2 === 1 ? "bg-surface" : "bg-dark"
-            }`}
+            className={`py-20 md:py-28 px-6 lg:px-10 border-b ${t.bg} ${t.border}`}
           >
             <div className="max-w-7xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20">
-                {/* Left header */}
                 <div className="lg:col-span-2 flex flex-col gap-6">
-                  <div className="text-copper w-16 h-16 flex items-center justify-center border border-edge rounded-sm bg-surface">
+                  <div
+                    className={`text-copper w-16 h-16 flex items-center justify-center border rounded-sm ${t.border} ${t.iconBg}`}
+                  >
                     {icon}
                   </div>
                   <div>
                     <p className="text-copper text-xs font-semibold uppercase tracking-[0.2em] mb-2">
                       {tagline}
                     </p>
-                    <h2 className="font-heading text-5xl md:text-6xl uppercase text-white leading-none tracking-wide mb-5">
+                    <h2
+                      className={`font-heading text-5xl md:text-6xl uppercase leading-none tracking-wide mb-5 ${t.text}`}
+                    >
                       {title}
                     </h2>
-                    <p className="text-muted text-sm leading-relaxed">
+                    <p className={`text-sm leading-relaxed ${t.textDim}`}>
                       {description}
                     </p>
                   </div>
@@ -230,20 +263,19 @@ export default function ServicesPage() {
                   </Link>
                 </div>
 
-                {/* Right feature grid */}
                 <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {items.map(({ label, desc }) => (
                     <div
                       key={label}
-                      className="p-5 bg-dark border border-edge hover:border-copper/30 transition-colors"
+                      className={`p-5 ${t.surface} border ${t.border} hover:border-copper/40 transition-colors`}
                     >
                       <div className="flex items-start gap-3">
                         <span className="w-1.5 h-1.5 rounded-full bg-copper mt-2 flex-shrink-0" />
                         <div>
-                          <p className="text-white text-sm font-semibold mb-1">
+                          <p className={`text-sm font-semibold mb-1 ${t.text}`}>
                             {label}
                           </p>
-                          <p className="text-muted text-xs leading-relaxed">
+                          <p className={`text-xs leading-relaxed ${t.textDim}`}>
                             {desc}
                           </p>
                         </div>
@@ -254,23 +286,23 @@ export default function ServicesPage() {
               </div>
             </div>
           </section>
-        ))}
-      </div>
+        );
+      })}
 
-      {/* CTA banner */}
-      <section className="py-20 px-6 lg:px-10 bg-surface border-b border-edge">
+      {/* ── CTA banner (COPPER for punctuation) ── */}
+      <section className="py-16 px-6 lg:px-10 bg-copper">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <h2 className="font-heading text-4xl md:text-5xl uppercase text-white leading-none tracking-wide">
               Ready to Get Started?
             </h2>
-            <p className="text-muted text-sm mt-2">
+            <p className="text-white/85 text-sm mt-2">
               No obligation quote, usually within 24 hours.
             </p>
           </div>
           <Link
             href="/contact"
-            className="btn-copper text-sm px-10 py-4 tracking-widest flex-shrink-0"
+            className="bg-dark text-white text-sm font-semibold uppercase tracking-widest px-10 py-4 hover:bg-black transition-colors flex-shrink-0"
           >
             Contact Us Today
           </Link>

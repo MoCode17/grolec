@@ -15,12 +15,15 @@ export default function HeroSection() {
       if (!el) return;
       el.style.opacity = "0";
       el.style.transform = "translateY(28px)";
-      setTimeout(() => {
-        if (!el) return;
-        el.style.transition = "opacity 0.8s ease, transform 0.8s ease";
-        el.style.opacity = "1";
-        el.style.transform = "translateY(0)";
-      }, 200 + i * 150);
+      setTimeout(
+        () => {
+          if (!el) return;
+          el.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+          el.style.opacity = "1";
+          el.style.transform = "translateY(0)";
+        },
+        200 + i * 150,
+      );
     });
   }, []);
 
@@ -28,10 +31,10 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex items-center hero-grain overflow-hidden bg-dark">
       {/* Background gradient layers */}
       <div className="absolute inset-0 bg-gradient-to-br from-dark via-surface/60 to-dark" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,rgba(160,64,42,0.07),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,rgba(184,78,44,0.10),transparent_60%)]" />
 
       {/* Brandmark watermark */}
-      <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 opacity-[0.04] pointer-events-none select-none w-[55vw] max-w-[700px] aspect-square">
+      <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 opacity-[0.05] pointer-events-none select-none w-[55vw] max-w-[700px] aspect-square">
         <Image
           src="/images/Brandmark%20Transparent.png"
           alt=""
@@ -68,7 +71,7 @@ export default function HeroSection() {
           {/* Subheading */}
           <p
             ref={subRef}
-            className="text-white/65 text-lg md:text-xl leading-relaxed max-w-xl mb-10"
+            className="text-snow-dim text-lg md:text-xl leading-relaxed max-w-xl mb-10"
           >
             Melbourne&apos;s trusted electrical contractors. Residential,
             commercial, and emergency electrical work — done right, on time, and
@@ -115,7 +118,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Bottom fade */}
+      {/* Bottom fade — fade to cream now */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-dark to-transparent pointer-events-none" />
     </section>
   );
@@ -129,6 +132,7 @@ function CheckIcon() {
       viewBox="0 0 14 14"
       fill="none"
       className="text-copper flex-shrink-0"
+      aria-hidden="true"
     >
       <circle cx="7" cy="7" r="6.5" stroke="currentColor" strokeWidth="1" />
       <path
