@@ -95,9 +95,6 @@ export default function Footer() {
                   Melbourne, VIC 3000
                 </span>
               </li>
-              <li>
-                <span className="text-xs text-muted">ABN: XX XXX XXX XXX</span>
-              </li>
             </ul>
           </div>
         </div>

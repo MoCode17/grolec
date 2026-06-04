@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { STAGGER_DELAYS } from "@/lib/animations";
 import { PROJECTS } from "@/lib/constants";
 import { ProjectCard } from "@/components/ui/ProjectCard";
@@ -34,16 +35,38 @@ export default function Projects() {
       className="bg-cream py-24 md:py-32 border-b border-edge-light"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div>
-          <div className="flex items-center gap-3 mb-4">
-            <span className="block w-8 h-px bg-copper" />
-            <span className="text-copper text-xs font-semibold uppercase tracking-[0.2em]">
-              Projects
-            </span>
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="block w-8 h-px bg-copper" />
+              <span className="text-copper text-xs font-semibold uppercase tracking-[0.2em]">
+                Projects
+              </span>
+            </div>
+            <h2 className="font-heading text-5xl md:text-6xl uppercase text-ink leading-none tracking-wide">
+              Our Recent Work
+            </h2>
           </div>
-          <h2 className="font-heading text-5xl md:text-6xl uppercase text-ink leading-none tracking-wide">
-            Our Recent Work
-          </h2>
+          <Link
+            href="/projects"
+            className="group flex items-center gap-2 text-xs font-semibold text-copper uppercase tracking-widest shrink-0 self-start md:self-auto"
+          >
+            View All Projects
+            <svg
+              className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-1"
+              viewBox="0 0 12 12"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M2 6h8M7 3l3 3-3 3"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
         </div>
 
         <div

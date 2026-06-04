@@ -87,6 +87,12 @@ export default function HeroSection() {
               Get a Free Quote
             </Link>
             <Link
+              href="/projects"
+              className="btn-ghost text-sm px-8 py-4 tracking-widest"
+            >
+              View Projects
+            </Link>
+            <Link
               href="/services"
               className="btn-ghost text-sm px-8 py-4 tracking-widest"
             >
