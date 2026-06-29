@@ -104,7 +104,7 @@ export default function TrustBar() {
   }, []);
 
   return (
-    <div className="bg-cream border-b border-edge-light" ref={ref}>
+    <div className="bg-warm-white border-b border-edge-light" ref={ref}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x lg:divide-edge-light">
           {trustItems.map(({ label, desc, icon }) => (

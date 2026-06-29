@@ -32,7 +32,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="bg-cream py-24 md:py-32 border-b border-edge-light"
+      className="bg-warm-white py-24 md:py-32 border-b border-edge-light"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">

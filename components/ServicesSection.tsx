@@ -129,7 +129,7 @@ export default function ServicesSection() {
   return (
     <section
       ref={sectionRef}
-      className="py-24 md:py-32 px-6 lg:px-10 bg-cream"
+      className="py-24 md:py-32 px-6 lg:px-10 bg-warm-white"
       id="services"
     >
       <div className="max-w-7xl mx-auto">
@@ -157,7 +157,7 @@ export default function ServicesSection() {
               className="service-card service-reveal reveal flex flex-col p-8 gap-6"
             >
               {/* Icon */}
-              <div className="text-copper w-14 h-14 flex items-center justify-center border border-edge-light rounded-sm bg-cream">
+              <div className="text-copper w-14 h-14 flex items-center justify-center border border-edge-light rounded-sm bg-wharm-white">
                 {icon}
               </div>
 

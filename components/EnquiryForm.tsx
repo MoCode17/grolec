@@ -109,13 +109,17 @@ export default function EnquiryForm() {
     if (Object.keys(newErrors).length > 0) return;
 
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
+    await fetch('/api/quote', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form),
+    });
     setLoading(false);
     setSubmitted(true);
   };
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-cream" id="quote">
+    <section ref={sectionRef} className="py-24 md:py-32 bg-warm-white" id="quote">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="form-inner reveal">
           {/* Header */}

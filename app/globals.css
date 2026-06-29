@@ -12,6 +12,10 @@
   --color-cream-alt: #efebe2; /* slightly deeper cream for alt rows */
   --color-paper: #ffffff; /* card / lifted surface on light */
   --color-edge-light: #e0d9cb; /* divider on light */
+  
+  /* --- Concrete pallete (cream alternative) --- */
+  --color-warm-white: #FAF8F4;
+  --color-concrete: #F1F2F4;
 
   /* ─── Dark palette (alternating sections) ───────── */
   --color-dark: #1a1a1a; /* primary dark section bg */
@@ -324,4 +328,24 @@ body {
 .nav-link:focus-visible {
   outline: 2px solid #b84e2c;
   outline-offset: 3px;
+}
+
+/* --- HERO Logo Animation --- */
+@keyframes surge {
+  0%, 100% {
+    opacity: 0.06;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  50% {
+    opacity: 0.16;
+    filter: drop-shadow(0 0 30px rgba(184, 78, 44, 0.65));
+  }
+}
+
+.brandmark-surge {
+  animation: surge 3.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brandmark-surge { animation: none; opacity: 0.08; }
 }

@@ -30,11 +30,11 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center hero-grain overflow-hidden bg-dark">
       {/* Background gradient layers */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark via-surface/60 to-dark" />
+      <div className="absolute inset-0 bg-linear-to-br from-dark via-surface/60 to-dark" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,rgba(184,78,44,0.10),transparent_60%)]" />
 
       {/* Brandmark watermark */}
-      <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 opacity-[0.05] pointer-events-none select-none w-[55vw] max-w-[700px] aspect-square">
+      <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 pointer-events-none select-none w-[55vw] max-w-[700px] aspect-square brandmark-surge">
         <Image
           src="/images/Brandmark%20Transparent.png"
           alt=""
@@ -45,7 +45,7 @@ export default function HeroSection() {
       </div>
 
       {/* Thin copper vertical line accent */}
-      <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-copper/40 to-transparent" />
+      <div className="absolute left-0 top-0 bottom-0 w-px bg-linear-to-b from-transparent via-copper/40 to-transparent" />
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 w-full pt-28 pb-20 md:pt-36 md:pb-28">
