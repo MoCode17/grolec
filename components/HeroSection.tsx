@@ -3,8 +3,9 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import type { HomePage } from "@/sanity/lib/types";
 
-export default function HeroSection() {
+export default function HeroSection({ hero }: { hero?: HomePage["hero"] }) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctasRef = useRef<HTMLDivElement>(null);
@@ -26,6 +27,8 @@ export default function HeroSection() {
       );
     });
   }, []);
+
+  const badges = hero?.trustBadges ?? [];
 
   return (
     <section className="relative min-h-screen flex items-center hero-grain overflow-hidden bg-dark">
@@ -54,7 +57,7 @@ export default function HeroSection() {
           <div className="flex items-center gap-3 mb-6">
             <span className="block w-8 h-px bg-copper" />
             <span className="text-copper text-xs font-semibold uppercase tracking-[0.2em]">
-              Melbourne Electricians
+              {hero?.eyebrow}
             </span>
           </div>
 
@@ -63,9 +66,9 @@ export default function HeroSection() {
             ref={headingRef}
             className="font-heading text-[clamp(4rem,10vw,9rem)] leading-none tracking-wide uppercase text-white mb-6"
           >
-            Powering
+            {hero?.headingLine1}
             <br />
-            <span className="text-copper">Your Ideas.</span>
+            <span className="text-copper">{hero?.headingLine2}</span>
           </h1>
 
           {/* Subheading */}
@@ -73,9 +76,7 @@ export default function HeroSection() {
             ref={subRef}
             className="text-snow-dim text-lg md:text-xl leading-relaxed max-w-xl mb-10"
           >
-            Melbourne&apos;s trusted electrical contractors. Residential,
-            commercial, and emergency electrical work — done right, on time, and
-            without surprises.
+            {hero?.subheading}
           </p>
 
           {/* CTAs */}
@@ -102,24 +103,19 @@ export default function HeroSection() {
 
           {/* Trust micro-badge */}
           <div className="flex items-center gap-6 mt-12 pt-8 border-t border-edge">
-            <div className="flex items-center gap-2">
-              <CheckIcon />
-              <span className="text-xs text-muted uppercase tracking-widest">
-                Licensed &amp; Insured
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckIcon />
-              <span className="text-xs text-muted uppercase tracking-widest">
-                Melbourne Local
-              </span>
-            </div>
-            <div className="hidden sm:flex items-center gap-2">
-              <CheckIcon />
-              <span className="text-xs text-muted uppercase tracking-widest">
-                Fast Response
-              </span>
-            </div>
+            {badges.map((badge, i) => (
+              <div
+                key={i}
+                className={`items-center gap-2 ${
+                  i >= 2 ? "hidden sm:flex" : "flex"
+                }`}
+              >
+                <CheckIcon />
+                <span className="text-xs text-muted uppercase tracking-widest">
+                  {badge}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

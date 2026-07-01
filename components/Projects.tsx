@@ -3,10 +3,17 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { STAGGER_DELAYS } from "@/lib/animations";
-import { PROJECTS } from "@/lib/constants";
+import { urlFor } from "@/sanity/lib/image";
 import { ProjectCard } from "@/components/ui/ProjectCard";
+import type { HomePage, Project } from "@/sanity/lib/types";
 
-export default function Projects() {
+export default function Projects({
+  intro,
+  projects,
+}: {
+  intro?: HomePage["projectsIntro"];
+  projects?: Project[];
+}) {
   const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -40,11 +47,11 @@ export default function Projects() {
             <div className="flex items-center gap-3 mb-4">
               <span className="block w-8 h-px bg-copper" />
               <span className="text-copper text-xs font-semibold uppercase tracking-[0.2em]">
-                Projects
+                {intro?.eyebrow}
               </span>
             </div>
             <h2 className="font-heading text-5xl md:text-6xl uppercase text-ink leading-none tracking-wide">
-              Our Recent Work
+              {intro?.heading}
             </h2>
           </div>
           <Link
@@ -73,13 +80,17 @@ export default function Projects() {
           ref={gridRef}
           className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 mt-12"
         >
-          {PROJECTS.map((project, index) => (
+          {(projects ?? []).map((project, index) => (
             <ProjectCard
-              key={project.title}
-              title={project.title}
-              category={project.category}
-              image={project.image}
-              description={project.description}
+              key={project._id}
+              title={project.title ?? ""}
+              category={project.category ?? ""}
+              image={
+                project.image
+                  ? urlFor(project.image).width(800).height(600).url()
+                  : ""
+              }
+              description={project.description ?? ""}
               delayClass={STAGGER_DELAYS[index % STAGGER_DELAYS.length]}
             />
           ))}

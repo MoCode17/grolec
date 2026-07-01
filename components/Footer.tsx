@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { stegaClean } from "next-sanity";
+import type { SiteSettings } from "@/sanity/lib/types";
 
 const navLinks = [
   { href: "/services", label: "Services" },
@@ -13,7 +15,15 @@ const serviceLinks = [
   { href: "/services#emergency", label: "Emergency" },
 ];
 
-export default function Footer() {
+export default function Footer({
+  settings,
+}: {
+  settings?: SiteSettings | null;
+}) {
+  const phone = settings?.phone ?? "0412 345 678";
+  const phoneHref = stegaClean(settings?.phoneHref) || "+61412345678";
+  const email = settings?.email ?? "info@grolec.com.au";
+  const address = settings?.address ?? "Melbourne, VIC 3000";
   return (
     <footer className="bg-dark text-white border-t border-edge">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -76,24 +86,22 @@ export default function Footer() {
             <ul className="flex flex-col gap-3">
               <li>
                 <a
-                  href="tel:+61412345678"
+                  href={`tel:${phoneHref}`}
                   className="text-sm text-snow-dim hover:text-white transition-colors"
                 >
-                  0412 345 678
+                  {phone}
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:info@grolec.com.au"
+                  href={`mailto:${stegaClean(email)}`}
                   className="text-sm text-snow-dim hover:text-white transition-colors"
                 >
-                  info@grolec.com.au
+                  {email}
                 </a>
               </li>
               <li>
-                <span className="text-sm text-snow-dim">
-                  Melbourne, VIC 3000
-                </span>
+                <span className="text-sm text-snow-dim">{address}</span>
               </li>
             </ul>
           </div>

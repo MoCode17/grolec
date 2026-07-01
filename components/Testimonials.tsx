@@ -1,30 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-
-const testimonials = [
-  {
-    quote:
-      "Grolec did a full switchboard upgrade and rewire on our 1970s home. Clean, professional, and finished exactly on budget. Wouldn't use anyone else.",
-    name: "Michael T.",
-    suburb: "Hawthorn",
-    rating: 5,
-  },
-  {
-    quote:
-      "We needed an emergency callout at 9pm for a tripped switchboard. They were there in under an hour, sorted it, and didn't overcharge. Genuinely impressive.",
-    name: "Sarah K.",
-    suburb: "Fitzroy",
-    rating: 5,
-  },
-  {
-    quote:
-      "Fitted out our new café in South Yarra. Everything was done to spec, on time, and the team was respectful of our space. Highly recommend for commercial work.",
-    name: "James P.",
-    suburb: "South Yarra",
-    rating: 5,
-  },
-];
+import type { HomePage, Testimonial } from "@/sanity/lib/types";
 
 function StarRating({ count }: { count: number }) {
   return (
@@ -49,7 +26,13 @@ function StarRating({ count }: { count: number }) {
   );
 }
 
-export default function Testimonials() {
+export default function Testimonials({
+  intro,
+  testimonials,
+}: {
+  intro?: HomePage["testimonialsIntro"];
+  testimonials?: Testimonial[];
+}) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -84,44 +67,49 @@ export default function Testimonials() {
             <div className="flex items-center gap-3 mb-4">
               <span className="block w-8 h-px bg-copper" />
               <span className="text-copper text-xs font-semibold uppercase tracking-[0.2em]">
-                Testimonials
+                {intro?.eyebrow}
               </span>
             </div>
             <h2 className="font-heading text-5xl md:text-6xl uppercase text-white leading-none tracking-wide">
-              What Clients Say
+              {intro?.heading}
             </h2>
           </div>
           <div className="flex items-center gap-3 bg-surface border border-edge px-5 py-3">
             <StarRating count={5} />
             <div className="text-sm">
-              <span className="text-white font-semibold">4.9</span>
-              <span className="text-muted"> · 87 Google reviews</span>
+              <span className="text-white font-semibold">
+                {intro?.ratingValue}
+              </span>
+              <span className="text-muted">
+                {" "}
+                · {intro?.reviewCount} Google reviews
+              </span>
             </div>
           </div>
         </div>
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map(({ quote, name, suburb, rating }) => (
+          {(testimonials ?? []).map((t) => (
             <div
-              key={name}
+              key={t._id}
               className="testimonial-card t-card reveal p-8 flex flex-col gap-6"
             >
-              <StarRating count={rating} />
+              <StarRating count={t.rating ?? 5} />
 
               <blockquote className="text-snow-dim text-sm leading-relaxed flex-1">
-                &ldquo;{quote}&rdquo;
+                &ldquo;{t.quote}&rdquo;
               </blockquote>
 
               <div className="flex items-center gap-3 pt-4 border-t border-edge">
                 <div className="w-9 h-9 rounded-full bg-copper/10 border border-copper/30 flex items-center justify-center">
                   <span className="text-copper text-xs font-bold">
-                    {name[0]}
+                    {t.name?.[0]}
                   </span>
                 </div>
                 <div>
-                  <p className="text-white text-sm font-semibold">{name}</p>
-                  <p className="text-muted text-xs">{suburb}</p>
+                  <p className="text-white text-sm font-semibold">{t.name}</p>
+                  <p className="text-muted text-xs">{t.suburb}</p>
                 </div>
               </div>
             </div>
