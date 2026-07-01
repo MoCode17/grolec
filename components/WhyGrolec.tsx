@@ -2,27 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { stegaClean } from "next-sanity";
+import { urlFor } from "@/sanity/lib/image";
+import type { HomePage } from "@/sanity/lib/types";
 
-const points = [
-  {
-    title: "Quality Workmanship",
-    desc: "We don't cut corners. Every installation is done to Australian standards, inspected, and left clean.",
-  },
-  {
-    title: "Upfront Pricing",
-    desc: "No surprise invoices. You'll know the cost before we start — always.",
-  },
-  {
-    title: "No Fuss, No Drama",
-    desc: "We show up on time, get the job done, and leave your place cleaner than we found it.",
-  },
-  {
-    title: "Local Melbourne Know-How",
-    desc: "We know Melbourne's housing stock, council requirements, and infrastructure inside out.",
-  },
-];
-
-export default function WhyGrolec() {
+export default function WhyGrolec({ why }: { why?: HomePage["why"] }) {
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
 
@@ -42,6 +26,11 @@ export default function WhyGrolec() {
     return () => observer.disconnect();
   }, []);
 
+  const points = why?.valuePoints ?? [];
+  const imageUrl = why?.image
+    ? urlFor(why.image).width(800).height(800).fit("crop").url()
+    : null;
+
   return (
     <section className="py-24 md:py-32 bg-dark text-white border-y border-edge relative overflow-hidden">
       {/* Subtle copper glow */}
@@ -55,21 +44,17 @@ export default function WhyGrolec() {
               <div className="flex items-center gap-3 mb-4">
                 <span className="block w-8 h-px bg-copper" />
                 <span className="text-copper text-xs font-semibold uppercase tracking-[0.2em]">
-                  Why Grolec
+                  {why?.eyebrow}
                 </span>
               </div>
               <h2 className="font-heading text-5xl md:text-6xl uppercase text-white leading-none tracking-wide">
-                No Surprises.
-                <br />
-                <span className="text-copper">Just Solid</span>
-                <br />
-                Electrical Work.
+                {why?.heading}
               </h2>
             </div>
 
             <ul className="flex flex-col gap-6">
-              {points.map(({ title, desc }) => (
-                <li key={title} className="flex gap-4">
+              {points.map(({ title, desc }, i) => (
+                <li key={i} className="flex gap-4">
                   <div className="flex-shrink-0 w-6 h-6 rounded-sm bg-copper/10 border border-copper/30 flex items-center justify-center mt-0.5">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                       <path
@@ -101,13 +86,15 @@ export default function WhyGrolec() {
               {/* Decorative border frame */}
               <div className="absolute inset-4 border border-copper/20 rounded-sm pointer-events-none z-10" />
               <div className="absolute inset-0 rounded-sm overflow-hidden bg-surface">
-                <Image
-                  src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&q=80"
-                  alt="Grolec electrician at work"
-                  fill
-                  className="object-cover opacity-80"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
+                {imageUrl && (
+                  <Image
+                    src={imageUrl}
+                    alt={stegaClean(why?.image?.alt) || "Grolec electrician at work"}
+                    fill
+                    className="object-cover opacity-80"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                )}
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent" />
               </div>
@@ -120,11 +107,8 @@ export default function WhyGrolec() {
 
               {/* Badge */}
               <div className="absolute bottom-6 left-6 right-6 bg-dark/90 backdrop-blur-sm border border-edge p-4 z-20">
-                <p className="text-copper text-xs font-semibold uppercase tracking-widest mb-0.5">
-                  Melbourne Based
-                </p>
                 <p className="text-white text-sm font-medium">
-                  Licensed & insured since day one.
+                  {why?.badgeText}
                 </p>
               </div>
             </div>

@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { stegaClean } from "next-sanity";
+import type { SiteSettings } from "@/sanity/lib/types";
 
 const navLinks = [
   { href: "/projects", label: "Projects" },
@@ -12,7 +14,13 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
-export default function Navbar() {
+export default function Navbar({
+  settings,
+}: {
+  settings?: SiteSettings | null;
+}) {
+  const phone = settings?.phone ?? "0412 345 678";
+  const phoneHref = stegaClean(settings?.phoneHref) || "+61412345678";
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -70,7 +78,7 @@ export default function Navbar() {
 
           {/* Phone — always visible above the fold */}
           <a
-            href="tel:+61412345678"
+            href={`tel:${phoneHref}`}
             className="hidden lg:flex items-center gap-2 text-copper hover:text-copper-light transition-colors text-sm font-semibold tracking-wide"
             aria-label="Call Grolec"
           >
@@ -88,7 +96,7 @@ export default function Navbar() {
                 strokeLinejoin="round"
               />
             </svg>
-            0412 345 678
+            {phone}
           </a>
 
           <Link
@@ -141,7 +149,7 @@ export default function Navbar() {
             </Link>
           ))}
           <a
-            href="tel:+61412345678"
+            href={`tel:${phoneHref}`}
             className="text-copper text-base font-semibold tracking-wide flex items-center gap-2"
           >
             <svg
@@ -158,7 +166,7 @@ export default function Navbar() {
                 strokeLinejoin="round"
               />
             </svg>
-            0412 345 678
+            {phone}
           </a>
           <Link
             href="/contact"

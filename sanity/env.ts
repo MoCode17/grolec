@@ -16,10 +16,19 @@ export const apiVersion =
 export const dataset =
   process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 
-export const projectId =
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "";
+// `createClient` throws synchronously if projectId is empty, which would break
+// `next build` before real Sanity credentials exist. A syntactically-valid
+// placeholder keeps the client constructible; requests simply fail at runtime
+// (same as any other missing-config case) instead of at build/import time.
+const PLACEHOLDER_PROJECT_ID = "no-project-configured";
 
-if (!projectId && process.env.NODE_ENV !== "production") {
+export const projectId =
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || PLACEHOLDER_PROJECT_ID;
+
+if (
+  projectId === PLACEHOLDER_PROJECT_ID &&
+  process.env.NODE_ENV !== "production"
+) {
   // Visible during local dev so the missing config is obvious.
   console.warn(
     "[sanity] NEXT_PUBLIC_SANITY_PROJECT_ID is not set. Add it to .env.local — see .env.example.",

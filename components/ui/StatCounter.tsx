@@ -4,14 +4,14 @@ import { useEffect, useRef, useState } from "react";
 
 type StatCounterProps = {
   value: number;
-  suffix: string;
-  label: string;
+  suffix?: string;
+  label?: string;
   decimals?: number;
 };
 
 export function StatCounter({
   value,
-  suffix,
+  suffix = "",
   label,
   decimals = 0,
 }: StatCounterProps) {

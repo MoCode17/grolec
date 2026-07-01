@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { stegaClean } from "next-sanity";
 
 type FormData = {
   name: string;
@@ -33,7 +34,19 @@ function validate(data: FormData): FormErrors {
   return errors;
 }
 
-export default function EnquiryForm() {
+type EnquiryFormProps = {
+  heading?: string;
+  subtext?: string;
+  phone?: string;
+  phoneHref?: string;
+};
+
+export default function EnquiryForm({
+  heading = "Get a Free Quote",
+  subtext = "Tell us what you need and we'll get back to you within 24 hours. No obligation, no hard sell.",
+  phone = "0412 345 678",
+  phoneHref = "+61412345678",
+}: EnquiryFormProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [form, setForm] = useState<FormData>({
     name: "",
@@ -131,12 +144,9 @@ export default function EnquiryForm() {
               </span>
             </div>
             <h2 className="font-heading text-5xl md:text-6xl uppercase text-ink leading-none tracking-wide mb-4">
-              Get a Free Quote
+              {heading}
             </h2>
-            <p className="text-ink-dim text-sm leading-relaxed">
-              Tell us what you need and we&apos;ll get back to you within 24
-              hours. No obligation, no hard sell.
-            </p>
+            <p className="text-ink-dim text-sm leading-relaxed">{subtext}</p>
           </div>
 
           {submitted ? (
@@ -255,10 +265,10 @@ export default function EnquiryForm() {
                 <p className="text-ink-muted text-xs">
                   Need something urgent?{" "}
                   <a
-                    href="tel:+61412345678"
+                    href={`tel:${stegaClean(phoneHref)}`}
                     className="text-copper font-semibold hover:underline"
                   >
-                    Call 0412 345 678
+                    Call {phone}
                   </a>
                 </p>
               </div>
