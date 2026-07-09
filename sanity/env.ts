@@ -25,12 +25,10 @@ const PLACEHOLDER_PROJECT_ID = "no-project-configured";
 export const projectId =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || PLACEHOLDER_PROJECT_ID;
 
-if (
-  projectId === PLACEHOLDER_PROJECT_ID &&
-  process.env.NODE_ENV !== "production"
-) {
-  // Visible during local dev so the missing config is obvious.
+if (projectId === PLACEHOLDER_PROJECT_ID) {
+  // Also logs in production (e.g. Vercel function logs) so a missing env var
+  // on the deployed environment doesn't fail silently with a blank frontend.
   console.warn(
-    "[sanity] NEXT_PUBLIC_SANITY_PROJECT_ID is not set. Add it to .env.local — see .env.example.",
+    "[sanity] NEXT_PUBLIC_SANITY_PROJECT_ID is not set. Add it to .env.local (local dev) or your deployment's environment variables — see .env.example.",
   );
 }
